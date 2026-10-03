@@ -516,6 +516,7 @@ def register():
 
         db = get_db_connection()
         cursor = db.cursor()
+        print("REGISTER ROUTE - NEW CODE")
 
         try:
 
@@ -537,7 +538,7 @@ def register():
             cursor.close()
             db.close()
 
-            return f"Database Error: {e}"
+            return "TEST ERROR: " + str(e)
 
         cursor.close()
         db.close()

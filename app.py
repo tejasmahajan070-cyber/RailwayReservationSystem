@@ -11,6 +11,7 @@ app.secret_key = "railbook_demo_secret_key"
 # DATABASE
 # =========================================================
 
+
 def get_db_connection():
     return mysql.connector.connect(
         host=os.environ.get("MYSQLHOST"),
@@ -531,12 +532,12 @@ def register():
 
             db.commit()
 
-        except mysql.connector.Error:
+        except mysql.connector.Error as e:
 
             cursor.close()
             db.close()
 
-            return "Email already registered."
+            return f"Database Error: {e}"
 
         cursor.close()
         db.close()

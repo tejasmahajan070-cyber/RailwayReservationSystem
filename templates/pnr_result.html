@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PNR Status Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Railway Reservation System
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/my-bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PNR RESULT -->
+
+    <div style="
+        min-height:70vh;
+        padding:50px 20px;
+    ">
+
+        <div style="
+            max-width:800px;
+            margin:auto;
+            background:white;
+            padding:35px;
+            border-radius:12px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.10);
+        ">
+
+            <!-- HEADER -->
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                flex-wrap:wrap;
+                gap:15px;
+                margin-bottom:25px;
+            ">
+
+                <div>
+
+                    <p style="
+                        color:#666;
+                        margin-bottom:5px;
+                    ">
+                        PNR Number
+                    </p>
+
+                    <h1 style="
+                        color:#173b70;
+                    ">
+                        {{ booking.pnr }}
+                    </h1>
+
+                </div>
+
+
+                <div style="
+                    background:#d4edda;
+                    color:#155724;
+                    padding:10px 18px;
+                    border-radius:20px;
+                    font-weight:bold;
+                ">
+                    CONFIRMED
+                </div>
+
+            </div>
+
+
+            <!-- TRAIN DETAILS -->
+
+            <div style="
+                border-top:1px solid #eee;
+                border-bottom:1px solid #eee;
+                padding:20px 0;
+                margin-bottom:25px;
+            ">
+
+                <h2 style="
+                    color:#173b70;
+                    margin-bottom:8px;
+                ">
+                    {{ booking.train_name }}
+                </h2>
+
+                <p style="margin-bottom:5px;">
+                    Train Number:
+                    <b>{{ booking.train_number }}</b>
+                </p>
+
+                <p>
+                    {{ booking.from_station }}
+                    →
+                    {{ booking.to_station }}
+                </p>
+
+            </div>
+
+
+            <!-- JOURNEY DETAILS -->
+
+            <h3 style="
+                color:#173b70;
+                margin-bottom:15px;
+            ">
+                Journey Details
+            </h3>
+
+            <div style="
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+                gap:20px;
+                margin-bottom:30px;
+            ">
+
+                <div>
+                    <small>Passenger Name</small>
+                    <p>
+                        <b>{{ booking.passenger_name }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Age</small>
+                    <p>
+                        <b>{{ booking.age }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Gender</small>
+                    <p>
+                        <b>{{ booking.gender }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Mobile</small>
+                    <p>
+                        <b>{{ booking.mobile }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Journey Date</small>
+                    <p>
+                        <b>{{ booking.journey_date }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Class</small>
+                    <p>
+                        <b>{{ booking.train_class }}</b>
+                    </p>
+                </div>
+
+
+                <div>
+                    <small>Seat Number</small>
+                    <p>
+                        <b>{{ booking.seat_number }}</b>
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div style="
+                display:flex;
+                gap:15px;
+                flex-wrap:wrap;
+            ">
+
+                <a
+                    href="/pnr-status"
+                    style="
+                        background:#173b70;
+                        color:white;
+                        text-decoration:none;
+                        padding:12px 22px;
+                        border-radius:7px;
+                        font-weight:bold;
+                    "
+                >
+                    Check Another PNR
+                </a>
+
+
+                <a
+                    href="/"
+                    style="
+                        background:#e85d04;
+                        color:white;
+                        text-decoration:none;
+                        padding:12px 22px;
+                        border-radius:7px;
+                        font-weight:bold;
+                    "
+                >
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Railway Reservation System
+
+    </div>
+
+</body>
+
+</html>

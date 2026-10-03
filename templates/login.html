@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - RailBook</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef4ff, #dce8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 380px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0b2d5c;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0b2d5c;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            background: #0b2d5c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #174b8a;
+        }
+
+        .status-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #f1f5fa;
+            color: #0b2d5c;
+            border: 1px solid #0b2d5c;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .status-btn:hover {
+            background: #e2ebf8;
+        }
+
+        .register-text {
+            text-align: center;
+            margin-top: 22px;
+            color: #555;
+        }
+
+        .register-text a {
+            color: #0b2d5c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        @media (max-width: 450px) {
+            .login-container {
+                width: 90%;
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">
+            🚆 RailBook
+        </div>
+
+        <div class="subtitle">
+            Railway Reservation System
+        </div>
+
+        <form action="/login" method="POST">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <!-- Train Running Status -->
+        <a href="/train-status" class="status-btn">
+            🚆 Train Running Status
+        </a>
+
+        <div class="register-text">
+            Don't have an account?
+            <a href="/register">Register</a>
+        </div>
+
+        <div class="footer">
+            © 2026 RailBook
+        </div>
+
+    </div>
+
+</body>
+</html>

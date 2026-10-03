@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        Railway Reservation System
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/pnr-status">
+            PNR Status
+        </a>
+
+        <a href="/my-bookings">
+            My Bookings
+        </a>
+
+        <a href="/logout"
+           style="
+               background:#e85d04;
+               padding:8px 15px;
+               border-radius:6px;
+               font-weight:bold;
+           ">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div style="
+    min-height:70vh;
+    padding:60px 20px;
+">
+
+    <div style="
+        max-width:600px;
+        margin:auto;
+        background:white;
+        padding:40px;
+        border-radius:12px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.10);
+    ">
+
+
+        <h1 style="
+            text-align:center;
+            color:#173b70;
+            margin-bottom:10px;
+        ">
+            My Profile
+        </h1>
+
+
+        <p style="
+            text-align:center;
+            color:#666;
+            margin-bottom:35px;
+        ">
+            Your account information
+        </p>
+
+
+        <!-- NAME -->
+
+        <div style="
+            border-bottom:1px solid #eee;
+            padding:18px 0;
+        ">
+
+            <small style="color:#777;">
+                Full Name
+            </small>
+
+            <h3 style="
+                color:#173b70;
+                margin-top:6px;
+            ">
+                {{ user.name }}
+            </h3>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div style="
+            border-bottom:1px solid #eee;
+            padding:18px 0;
+        ">
+
+            <small style="color:#777;">
+                Email
+            </small>
+
+            <h3 style="
+                color:#173b70;
+                margin-top:6px;
+            ">
+                {{ user.email }}
+            </h3>
+
+        </div>
+
+
+        <!-- MOBILE -->
+
+        <div style="
+            padding:18px 0;
+        ">
+
+            <small style="color:#777;">
+                Mobile Number
+            </small>
+
+            <h3 style="
+                color:#173b70;
+                margin-top:6px;
+            ">
+                {{ user.mobile }}
+            </h3>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div style="
+            text-align:center;
+            margin-top:25px;
+        ">
+
+            <a href="/"
+               style="
+                   display:inline-block;
+                   background:#173b70;
+                   color:white;
+                   text-decoration:none;
+                   padding:12px 25px;
+                   border-radius:7px;
+                   font-weight:bold;
+               ">
+                Back to Home
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    Railway Reservation System
+
+</div>
+
+
+</body>
+
+</html>

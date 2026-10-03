@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings - RailBook</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #0b1f3a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 35px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #f28c28;
+        }
+
+        .logout-btn {
+            background: #f28c28;
+            padding: 8px 14px;
+            border-radius: 5px;
+        }
+
+        .logout-btn:hover {
+            color: white !important;
+            background: #d97613;
+        }
+
+        /* ================= PAGE ================= */
+
+        .page-container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            background: #0b1f3a;
+            color: white;
+            padding: 22px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .page-header p {
+            margin: 8px 0 0;
+            font-size: 15px;
+        }
+
+        /* ================= BOOKING ================= */
+
+        .booking-card {
+            background: white;
+            margin-top: 20px;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+        }
+
+        .booking-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 7px;
+            border-left: 5px solid #f28c28;
+        }
+
+        .pnr-section h3 {
+            margin: 0;
+            color: #0b1f3a;
+        }
+
+        .pnr-number {
+            color: #f28c28;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .booking-id {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .train-section {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            background: #0b1f3a;
+            color: white;
+            padding: 11px 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .train-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .detail-box {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .detail-box strong {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .route {
+            text-align: center;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 7px;
+            margin-top: 12px;
+        }
+
+        .route-text {
+            font-size: 21px;
+            font-weight: bold;
+            color: #0b1f3a;
+        }
+
+        .arrow {
+            color: #f28c28;
+            margin: 0 12px;
+        }
+
+        /* ================= PASSENGERS ================= */
+
+        .passenger-card {
+            border: 1px solid #ddd;
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .passenger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef2f6;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .passenger-header h3 {
+            margin: 0;
+            color: #0b1f3a;
+            font-size: 17px;
+        }
+
+        .seat-badge {
+            background: #f28c28;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .passenger-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        /* ================= FARE ================= */
+
+        .fare-box {
+            margin-top: 18px;
+            background: #0b1f3a;
+            color: white;
+            padding: 17px;
+            border-radius: 8px;
+        }
+
+        .fare-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 7px 0;
+        }
+
+        .total-fare {
+            border-top: 1px solid rgba(255,255,255,0.4);
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffb15c;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .booking-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+
+        .cancel-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn:hover {
+            background: #c9302c;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-message {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .empty-message h2 {
+            color: #0b1f3a;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 11px 20px;
+            background: #f28c28;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .page-container {
+                width: 94%;
+            }
+
+            .booking-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .train-grid,
+            .passenger-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .route-text {
+                font-size: 17px;
+            }
+
+            .passenger-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="{{ url_for('home') }}"
+       class="logo">
+
+        RailBook
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('home') }}">
+            Search Train
+        </a>
+
+        <a href="{{ url_for('pnr_status') }}">
+            PNR Status
+        </a>
+
+        <a href="{{ url_for('my_bookings') }}">
+            My Bookings
+        </a>
+
+        <a href="{{ url_for('train_running_status') }}">
+            Train Status
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            Profile
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="page-container">
+
+
+    <div class="page-header">
+
+        <h1>
+            My Bookings
+        </h1>
+
+        <p>
+            View all your railway reservations
+        </p>
+
+    </div>
+
+
+    {% if bookings %}
+
+
+        {% for booking in bookings %}
+
+
+        <div class="booking-card">
+
+
+            <!-- PNR -->
+
+            <div class="booking-top">
+
+                <div class="pnr-section">
+
+                    <h3>
+                        PNR Number
+                    </h3>
+
+                    <div class="pnr-number">
+                        {{ booking.pnr }}
+                    </div>
+
+                    {% if booking.booking_id %}
+
+                    <div class="booking-id">
+
+                        Booking ID:
+                        <strong>
+                            {{ booking.booking_id }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ booking.passenger_count }}
+                    </strong>
+
+                    Passenger{% if booking.passenger_count > 1 %}s{% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- TRAIN DETAILS -->
+
+            <div class="train-section">
+
+                <div class="section-title">
+                    Train Details
+                </div>
+
+
+                <div class="train-grid">
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Train Number
+                        </strong>
+
+                        {{ booking.train_number }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Train Name
+                        </strong>
+
+                        {{ booking.train_name }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Journey Date
+                        </strong>
+
+                        {{ booking.journey_date }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Class
+                        </strong>
+
+                        {{ booking.train_class }}
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="route">
+
+                    <div class="route-text">
+
+                        {{ booking.from_station }}
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                        {{ booking.to_station }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSENGER DETAILS -->
+
+            <div class="train-section">
+
+                <div class="section-title">
+                    Passenger Details
+                </div>
+
+
+                {% for passenger in booking.passengers %}
+
+
+                <div class="passenger-card">
+
+
+                    <div class="passenger-header">
+
+                        <h3>
+                            Passenger {{ loop.index }}
+                        </h3>
+
+
+                        <div class="seat-badge">
+
+                            Seat:
+                            {{ passenger.seat_number }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="passenger-grid">
+
+
+                        <div class="detail-box">
+
+                            <strong>
+                                Passenger Name
+                            </strong>
+
+                            {{ passenger.passenger_name }}
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <strong>
+                                Mobile Number
+                            </strong>
+
+                            {{ passenger.mobile }}
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <strong>
+                                Age
+                            </strong>
+
+                            {{ passenger.age }}
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <strong>
+                                Gender
+                            </strong>
+
+                            {{ passenger.gender }}
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- FARE -->
+
+            <div class="fare-box">
+
+
+                <div class="fare-row">
+
+                    <span>
+                        Passengers
+                    </span>
+
+                    <span>
+                        {{ booking.passenger_count }}
+                    </span>
+
+                </div>
+
+
+                <div class="fare-row total-fare">
+
+                    <span>
+                        Total Fare
+                    </span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(booking.fare) }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CANCEL -->
+
+            <div class="booking-actions">
+
+                <form method="POST"
+                      action="{{ url_for('cancel_booking') }}"
+                      onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+
+                    <input type="hidden"
+                           name="booking_id"
+                           value="{{ booking.booking_id }}">
+
+                    <input type="hidden"
+                           name="pnr"
+                           value="{{ booking.pnr }}">
+
+                    <button type="submit"
+                            class="cancel-btn">
+
+                        Cancel Booking
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="empty-message">
+
+            <h2>
+                No Bookings Found
+            </h2>
+
+            <p>
+                You have not booked any train tickets yet.
+            </p>
+
+            <a href="{{ url_for('home') }}"
+               class="home-btn">
+
+                Search Trains
+
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>

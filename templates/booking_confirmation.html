@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Confirmed - RailBook</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .confirmation-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .success-header {
+            background: #0b1f3a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .success-header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .success-header p {
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .confirmation-card {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        .pnr-box {
+            background: #fff4e5;
+            border: 2px solid #f28c28;
+            padding: 18px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .pnr-box h3 {
+            margin: 0 0 8px 0;
+            color: #555;
+        }
+
+        .pnr-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f28c28;
+            letter-spacing: 2px;
+        }
+
+        .booking-id {
+            margin-top: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .section-title {
+            background: #0b1f3a;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .detail-box {
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .detail-box strong {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .route-box {
+            text-align: center;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .route {
+            font-size: 22px;
+            font-weight: bold;
+            color: #0b1f3a;
+        }
+
+        .arrow {
+            margin: 0 15px;
+            color: #f28c28;
+        }
+
+        /* Passenger Cards */
+
+        .passenger-card {
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .passenger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef2f6;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .passenger-header h3 {
+            margin: 0;
+            color: #0b1f3a;
+        }
+
+        .seat-badge {
+            background: #f28c28;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .passenger-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        /* Fare */
+
+        .fare-box {
+            margin-top: 25px;
+            background: #0b1f3a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .fare-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .total-fare {
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            padding-top: 12px;
+            margin-top: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffb15c;
+        }
+
+        /* Note */
+
+        .note {
+            margin-top: 20px;
+            background: #fff8e8;
+            border-left: 4px solid #f28c28;
+            padding: 12px;
+            color: #555;
+            border-radius: 4px;
+        }
+
+        /* Buttons */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #0b1f3a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #16365f;
+        }
+
+        .btn-secondary {
+            background: #f28c28;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #d97613;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            .confirmation-container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .details-grid,
+            .passenger-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .passenger-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="confirmation-container">
+
+    <!-- SUCCESS HEADER -->
+
+    <div class="success-header">
+
+        <h1>✓ Booking Confirmed!</h1>
+
+        <p>
+            Your railway reservation has been successfully completed.
+        </p>
+
+    </div>
+
+
+    <div class="confirmation-card">
+
+
+        <!-- PNR -->
+
+        <div class="pnr-box">
+
+            <h3>PNR Number</h3>
+
+            <div class="pnr-number">
+                {{ pnr }}
+            </div>
+
+            {% if booking_id %}
+
+            <div class="booking-id">
+
+                Booking ID:
+                <strong>{{ booking_id }}</strong>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- TRAIN DETAILS -->
+
+        <div class="section">
+
+            <div class="section-title">
+                Train Details
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-box">
+
+                    <strong>Train Number</strong>
+
+                    {{ train_number }}
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>Train Name</strong>
+
+                    {{ train_name }}
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>Class</strong>
+
+                    {{ train_class }}
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>Journey Date</strong>
+
+                    {{ journey_date }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- JOURNEY DETAILS -->
+
+        <div class="section">
+
+            <div class="section-title">
+                Journey Details
+            </div>
+
+
+            <div class="route-box">
+
+                <div class="route">
+
+                    {{ from_station }}
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                    {{ to_station }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PASSENGER DETAILS -->
+
+        <div class="section">
+
+            <div class="section-title">
+
+                Passenger Details
+
+                {% if passenger_count %}
+
+                    ({{ passenger_count }}
+                    Passenger{% if passenger_count > 1 %}s{% endif %})
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- LOOP THROUGH ALL PASSENGERS -->
+
+            {% for passenger in passengers %}
+
+            <div class="passenger-card">
+
+                <div class="passenger-header">
+
+                    <h3>
+                        Passenger {{ loop.index }}
+                    </h3>
+
+
+                    <div class="seat-badge">
+
+                        Seat:
+                        {{ passenger.seat_number }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="passenger-grid">
+
+
+                    <div class="detail-box">
+
+                        <strong>Name</strong>
+
+                        {{ passenger.name }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>Age</strong>
+
+                        {{ passenger.age }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>Gender</strong>
+
+                        {{ passenger.gender }}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>Mobile</strong>
+
+                        {{ passenger.mobile }}
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- FARE DETAILS -->
+
+        <div class="fare-box">
+
+
+            <div class="fare-row">
+
+                <span>
+                    Number of Passengers
+                </span>
+
+                <span>
+                    {{ passenger_count }}
+                </span>
+
+            </div>
+
+
+            <div class="fare-row">
+
+                <span>
+                    Fare per Passenger
+                </span>
+
+                <span>
+                    ₹{{ fare }}
+                </span>
+
+            </div>
+
+
+            <div class="fare-row total-fare">
+
+                <span>
+                    Total Fare
+                </span>
+
+                <span>
+                    ₹{{ total_fare }}
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NOTE -->
+
+        <div class="note">
+
+            <strong>Note:</strong>
+
+            This is a simulated railway reservation project.
+            The PNR generated here is a project PNR and is not
+            an official Indian Railways / IRCTC PNR.
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+
+            <a href="{{ url_for('my_bookings') }}"
+               class="btn btn-primary">
+
+                My Bookings
+
+            </a>
+
+
+            <a href="{{ url_for('home') }}"
+               class="btn btn-secondary">
+
+                Back to Home
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

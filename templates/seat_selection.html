@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Select Seat - RailBook</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #071d49;
+            color: white;
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title h1 {
+            color: #071d49;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+        /* TRAIN INFO */
+
+        .train-info {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .train-info h2 {
+            color: #071d49;
+            margin-bottom: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f5f7fb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        /* PASSENGER SECTION */
+
+        .passenger-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .passenger-section h2 {
+            color: #071d49;
+            margin-bottom: 15px;
+        }
+
+        .passenger-card {
+            background: #f5f7fb;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-left: 5px solid #071d49;
+        }
+
+        .passenger-card h3 {
+            color: #071d49;
+            margin-bottom: 8px;
+        }
+
+        .passenger-info {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .passenger-seat {
+            font-weight: bold;
+            color: #071d49;
+        }
+
+        /* SEAT SECTION */
+
+        .seat-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .seat-container h2 {
+            text-align: center;
+            color: #071d49;
+            margin-bottom: 10px;
+        }
+
+        .instruction {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* CURRENT PASSENGER */
+
+        .current-passenger {
+            background: #f5f7fb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #071d49;
+            font-weight: bold;
+        }
+
+        /* SEAT GRID */
+
+        .seat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .seat {
+            height: 55px;
+            border: 2px solid #071d49;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            color: #071d49;
+            font-weight: bold;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .seat:hover {
+            background: #e8eef9;
+        }
+
+        /* SELECTED */
+
+        .seat.selected {
+            background: #071d49;
+            color: white;
+            border-color: #071d49;
+        }
+
+        /* ALREADY BOOKED */
+
+        .seat.occupied {
+            background: #d3d3d3;
+            color: #777;
+            border-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .seat.occupied::after {
+            content: "Booked";
+            position: absolute;
+            font-size: 9px;
+            bottom: 3px;
+        }
+
+        /* SELECTED BY ANOTHER PASSENGER */
+
+        .seat.assigned {
+            background: #777;
+            color: white;
+            border-color: #555;
+            cursor: not-allowed;
+        }
+
+        .seat.assigned::after {
+            content: "Selected";
+            position: absolute;
+            font-size: 9px;
+            bottom: 3px;
+        }
+
+        /* LEGEND */
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid #777;
+        }
+
+        .available {
+            background: white;
+        }
+
+        .selected-box {
+            background: #071d49;
+        }
+
+        .booked-box {
+            background: #d3d3d3;
+        }
+
+        .assigned-box {
+            background: #777;
+        }
+
+        /* SELECTED SEATS */
+
+        .selected-seat {
+            text-align: center;
+            background: #f5f7fb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .selected-seat span {
+            font-weight: bold;
+            color: #071d49;
+        }
+
+        /* BUTTON */
+
+        .btn {
+            width: 100%;
+            border: none;
+            background: #071d49;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0b2d6b;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            background: #071d49;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 600px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .seat-grid {
+                grid-template-columns: repeat(4, 60px);
+                gap: 10px;
+            }
+
+            .seat {
+                height: 50px;
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚆 RailBook
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/train-status">
+            Train Status
+        </a>
+
+        <a href="/pnr-status">
+            PNR Status
+        </a>
+
+        <a href="/my-bookings">
+            My Bookings
+        </a>
+
+        <a href="/profile">
+            My Profile
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h1>Select Your Seats</h1>
+
+        <p>
+            Choose one available seat for each passenger
+        </p>
+
+    </div>
+
+
+    <!-- TRAIN INFORMATION -->
+
+    <div class="train-info">
+
+        <h2>
+            {{ train_name }}
+            ({{ train_number }})
+        </h2>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <strong>From</strong>
+
+                {{ from_station }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>To</strong>
+
+                {{ to_station }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>Journey Date</strong>
+
+                {{ journey_date }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>Class</strong>
+
+                {{ train_class }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>Passengers</strong>
+
+                {{ passenger_count }}
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>Fare / Passenger</strong>
+
+                ₹{{ fare }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PASSENGER SECTION -->
+
+    <div class="passenger-section">
+
+        <h2>Passenger Details</h2>
+
+        <div id="passengerList">
+
+            {% for i in range(passenger_count) %}
+
+            <div class="passenger-card"
+                 id="passengerCard{{ i }}">
+
+                <h3>
+                    Passenger {{ i + 1 }}
+                </h3>
+
+                <div class="passenger-info">
+
+                    <strong>
+                        {{ passenger_names[i] }}
+                    </strong>
+
+                    &nbsp; | &nbsp;
+
+                    Age:
+                    {{ ages[i] }}
+
+                    &nbsp; | &nbsp;
+
+                    {{ genders[i] }}
+
+                    &nbsp; | &nbsp;
+
+                    {{ mobiles[i] }}
+
+                </div>
+
+                <div class="passenger-seat">
+
+                    Selected Seat:
+                    <span id="passengerSeat{{ i }}">
+                        Not Selected
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- SEAT SELECTION -->
+
+    <div class="seat-container">
+
+        <h2>
+            Available Seats
+        </h2>
+
+        <p class="instruction">
+            Select a passenger above and then choose a seat
+        </p>
+
+
+        <!-- CURRENT PASSENGER -->
+
+        <div class="current-passenger">
+
+            Currently Selecting Seat For:
+
+            <span id="currentPassengerText">
+                Passenger 1
+            </span>
+
+        </div>
+
+
+        <!-- LEGEND -->
+
+        <div class="legend">
+
+            <div class="legend-item">
+
+                <div class="legend-box available"></div>
+
+                Available
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <div class="legend-box selected-box"></div>
+
+                Selected
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <div class="legend-box booked-box"></div>
+
+                Already Booked
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <div class="legend-box assigned-box"></div>
+
+                Assigned
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form action="/book"
+              method="POST"
+              id="seatForm"
+              onsubmit="return validateSeat();">
+
+
+            <!-- PASSENGER DETAILS -->
+
+            {% for i in range(passenger_count) %}
+
+                <input type="hidden"
+                       name="passenger_name[]"
+                       value="{{ passenger_names[i] }}">
+
+                <input type="hidden"
+                       name="age[]"
+                       value="{{ ages[i] }}">
+
+                <input type="hidden"
+                       name="gender[]"
+                       value="{{ genders[i] }}">
+
+                <input type="hidden"
+                       name="mobile[]"
+                       value="{{ mobiles[i] }}">
+
+                <input type="hidden"
+                       name="seat_preference[]"
+                       value="{{ seat_preferences[i] }}">
+
+            {% endfor %}
+
+
+            <!-- TRAIN DETAILS -->
+
+            <input type="hidden"
+                   name="train_number"
+                   value="{{ train_number }}">
+
+            <input type="hidden"
+                   name="train_name"
+                   value="{{ train_name }}">
+
+            <input type="hidden"
+                   name="from_station"
+                   value="{{ from_station }}">
+
+            <input type="hidden"
+                   name="to_station"
+                   value="{{ to_station }}">
+
+            <input type="hidden"
+                   name="journey_date"
+                   value="{{ journey_date }}">
+
+            <input type="hidden"
+                   name="train_class"
+                   value="{{ train_class }}">
+
+            <input type="hidden"
+                   name="fare"
+                   value="{{ fare }}">
+
+
+            <!-- PASSENGER COUNT -->
+
+            <input type="hidden"
+                   name="passenger_count"
+                   value="{{ passenger_count }}">
+
+
+            <!-- SEAT NUMBERS WILL BE CREATED BY JAVASCRIPT -->
+
+            <div id="seatInputs"></div>
+
+
+            <!-- SEAT GRID -->
+
+            <div class="seat-grid">
+
+                {% for number in range(1, 25) %}
+
+                    {% set seat_name =
+                    "S1-" ~ "%02d"|format(number) %}
+
+
+                    {% if seat_name in booked_seats %}
+
+                        <!-- ALREADY BOOKED -->
+
+                        <div class="seat occupied"
+                             data-seat="{{ seat_name }}">
+
+                            {{ seat_name }}
+
+                        </div>
+
+
+                    {% else %}
+
+                        <!-- AVAILABLE -->
+
+                        <div class="seat"
+                             data-seat="{{ seat_name }}"
+                             onclick="selectSeat(this, '{{ seat_name }}')">
+
+                            {{ seat_name }}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- SELECTED SEATS SUMMARY -->
+
+            <div class="selected-seat">
+
+                Selected Seats:
+
+                <span id="selectedSeatText">
+                    0 / {{ passenger_count }}
+                </span>
+
+            </div>
+
+
+            <!-- BOOK BUTTON -->
+
+            <button type="submit"
+                    class="btn">
+
+                🎟️ Confirm & Book Ticket
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 RailBook — Railway Reservation System
+
+</footer>
+
+
+
+<script>
+
+
+/* -------------------------------------------------
+   PASSENGER DATA
+------------------------------------------------- */
+
+const passengerCount = {{ passenger_count }};
+
+
+/*
+    Stores selected seat for every passenger.
+
+    Example:
+
+    passengerSeats[0] = "S1-01"
+    passengerSeats[1] = "S1-05"
+*/
+
+let passengerSeats = new Array(passengerCount).fill(null);
+
+
+/*
+    Passenger currently selecting seat.
+
+    0 = Passenger 1
+    1 = Passenger 2
+    etc.
+*/
+
+let currentPassenger = 0;
+
+
+
+/* -------------------------------------------------
+   UPDATE CURRENT PASSENGER
+------------------------------------------------- */
+
+function updateCurrentPassenger() {
+
+    document.getElementById("currentPassengerText").innerText =
+        "Passenger " + (currentPassenger + 1);
+
+}
+
+
+
+/* -------------------------------------------------
+   PASSENGER CARD CLICK
+------------------------------------------------- */
+
+function selectPassenger(index) {
+
+    currentPassenger = index;
+
+    updateCurrentPassenger();
+
+}
+
+
+
+/* -------------------------------------------------
+   MAKE PASSENGER CARDS CLICKABLE
+------------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    for (let i = 0; i < passengerCount; i++) {
+
+        const card =
+            document.getElementById("passengerCard" + i);
+
+        if (card) {
+
+            card.style.cursor = "pointer";
+
+            card.addEventListener("click", function() {
+
+                selectPassenger(i);
+
+            });
+
+        }
+
+    }
+
+});
+
+
+
+/* -------------------------------------------------
+   SEAT SELECTION
+------------------------------------------------- */
+
+function selectSeat(element, seatNumber) {
+
+
+    /* Do not allow occupied seat */
+
+    if (element.classList.contains("occupied")) {
+
+        return;
+
+    }
+
+
+    /*
+        Check whether another passenger
+        already has this seat.
+    */
+
+    for (let i = 0; i < passengerSeats.length; i++) {
+
+        if (
+            passengerSeats[i] === seatNumber &&
+            i !== currentPassenger
+        ) {
+
+            alert(
+                "This seat is already selected for Passenger " +
+                (i + 1) +
+                ". Please choose another seat."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+        If current passenger already had
+        a seat, remove its selected style.
+    */
+
+    if (passengerSeats[currentPassenger] !== null) {
+
+        const oldSeat =
+            document.querySelector(
+                '[data-seat="' +
+                passengerSeats[currentPassenger] +
+                '"]'
+            );
+
+        if (oldSeat) {
+
+            oldSeat.classList.remove("selected");
+
+        }
+
+    }
+
+
+    /*
+        Select new seat
+    */
+
+    element.classList.add("selected");
+
+
+    /*
+        Store seat
+    */
+
+    passengerSeats[currentPassenger] =
+        seatNumber;
+
+
+    /*
+        Update passenger card
+    */
+
+    document.getElementById(
+        "passengerSeat" + currentPassenger
+    ).innerText = seatNumber;
+
+
+    /*
+        Update summary
+    */
+
+    updateSelectedSeatCount();
+
+
+    /*
+        Automatically move to next passenger
+        if one is available.
+    */
+
+    if (currentPassenger < passengerCount - 1) {
+
+        currentPassenger++;
+
+        updateCurrentPassenger();
+
+    }
+
+}
+
+
+
+/* -------------------------------------------------
+   UPDATE SELECTED SEAT COUNT
+------------------------------------------------- */
+
+function updateSelectedSeatCount() {
+
+    let count = 0;
+
+    for (let i = 0; i < passengerSeats.length; i++) {
+
+        if (passengerSeats[i] !== null) {
+
+            count++;
+
+        }
+
+    }
+
+    document.getElementById(
+        "selectedSeatText"
+    ).innerText =
+        count + " / " + passengerCount;
+
+}
+
+
+
+/* -------------------------------------------------
+   CREATE HIDDEN SEAT INPUTS
+------------------------------------------------- */
+
+function createSeatInputs() {
+
+
+    const container =
+        document.getElementById("seatInputs");
+
+
+    /*
+        Remove old inputs
+    */
+
+    container.innerHTML = "";
+
+
+    /*
+        Create one seat_number[]
+        for every passenger.
+    */
+
+    for (let i = 0; i < passengerSeats.length; i++) {
+
+        const input =
+            document.createElement("input");
+
+        input.type = "hidden";
+
+        input.name = "seat_number[]";
+
+        input.value = passengerSeats[i];
+
+        container.appendChild(input);
+
+    }
+
+}
+
+
+
+/* -------------------------------------------------
+   FORM VALIDATION
+------------------------------------------------- */
+
+function validateSeat() {
+
+
+    /*
+        Check every passenger
+        has selected a seat.
+    */
+
+    for (let i = 0; i < passengerSeats.length; i++) {
+
+        if (passengerSeats[i] === null) {
+
+            alert(
+                "Please select a seat for Passenger " +
+                (i + 1) +
+                " before continuing."
+            );
+
+
+            currentPassenger = i;
+
+            updateCurrentPassenger();
+
+
+            return false;
+
+        }
+
+    }
+
+
+    /*
+        Check duplicate seats
+    */
+
+    for (let i = 0; i < passengerSeats.length; i++) {
+
+        for (let j = i + 1; j < passengerSeats.length; j++) {
+
+            if (
+                passengerSeats[i] ===
+                passengerSeats[j]
+            ) {
+
+                alert(
+                    "Two passengers cannot have the same seat."
+                );
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+        Create seat_number[] inputs
+    */
+
+    createSeatInputs();
+
+
+    return true;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

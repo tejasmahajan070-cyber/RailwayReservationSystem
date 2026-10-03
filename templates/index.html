@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RailBook - Railway Reservation</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #173f73;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #073b78;
+            color: white;
+
+            min-height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+
+            color: white;
+            text-decoration: none;
+
+            white-space: nowrap;
+        }
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 22px;
+        }
+
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+
+        .nav-links a:hover {
+            color: #ffd54f;
+        }
+
+
+        .welcome {
+            font-size: 14px;
+            color: #e8f0fa;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 400px;
+
+            background: linear-gradient(
+                135deg,
+                #073b78,
+                #1261ad
+            );
+
+            padding: 45px 6% 70px;
+
+            color: white;
+
+            text-align: center;
+        }
+
+
+        .hero h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .hero p {
+
+            font-size: 17px;
+
+            opacity: 0.92;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+        ========================= */
+
+        .search-box {
+
+            background: white;
+
+            max-width: 1280px;
+
+            margin: auto;
+
+            padding: 32px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.20);
+
+            color: #173f73;
+
+            text-align: left;
+        }
+
+
+        .search-title {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+
+            color: #073b78;
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 16px;
+
+            align-items: end;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #315579;
+        }
+
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            height: 46px;
+
+            border: 1px solid #d4dce6;
+
+            border-radius: 8px;
+
+            padding: 0 13px;
+
+            font-size: 14px;
+
+            color: #263f5a;
+
+            background: white;
+
+            outline: none;
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #788797;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #1261ad;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(18, 97, 173, 0.10);
+        }
+
+
+        .search-btn {
+
+            width: 100%;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #f36b16;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .search-btn:hover {
+
+            background: #d9570a;
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+
+            max-width: 1100px;
+
+            margin: 50px auto;
+
+            padding: 0 20px;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            font-size: 29px;
+
+            margin-bottom: 30px;
+
+            color: #073b78;
+        }
+
+
+        .service-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .service-card {
+
+            background: white;
+
+            padding: 28px 20px;
+
+            border-radius: 14px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, 0.08);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .service-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        .service-icon {
+
+            font-size: 35px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .service-card h3 {
+
+            color: #073b78;
+
+            margin-bottom: 8px;
+
+            font-size: 18px;
+        }
+
+
+        .service-card p {
+
+            color: #66778a;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            margin-bottom: 15px;
+        }
+
+
+        .service-card a {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: #073b78;
+
+            padding: 9px 16px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .service-card a:hover {
+
+            background: #1261ad;
+        }
+
+
+        /* =========================
+           INFO STRIP
+        ========================= */
+
+        .info-strip {
+
+            max-width: 1100px;
+
+            margin: 0 auto 50px;
+
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, 0.07);
+        }
+
+
+        .info-item {
+
+            text-align: center;
+
+            padding: 10px;
+        }
+
+
+        .info-item strong {
+
+            display: block;
+
+            color: #073b78;
+
+            font-size: 18px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-item span {
+
+            color: #6b7d90;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #062f61;
+
+            color: white;
+
+            padding: 25px 6%;
+
+            text-align: center;
+        }
+
+
+        footer p {
+
+            font-size: 13px;
+
+            color: #d7e4f2;
+
+            margin: 4px 0;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .form-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .service-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .nav-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 12px;
+            }
+
+
+            .hero {
+
+                padding:
+                    40px 18px 60px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 30px;
+            }
+
+
+            .search-box {
+
+                padding: 22px;
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .service-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .info-strip {
+
+                grid-template-columns: 1fr;
+
+                margin:
+                    0 20px 40px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+        🚆 RailBook
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+
+        <a href="/train-status">
+            Train Status
+        </a>
+
+
+        <a href="/pnr-status">
+            PNR Status
+        </a>
+
+
+        <a href="/my-bookings">
+            My Bookings
+        </a>
+
+
+        <a href="/profile">
+            My Profile
+        </a>
+
+
+        {% if user_name %}
+
+            <span class="welcome">
+                Welcome, {{ user_name }}
+            </span>
+
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section class="hero">
+
+    <h1>
+        Book Your Train Journey
+    </h1>
+
+
+    <p>
+        Search trains, select your seat and manage your railway bookings easily.
+    </p>
+
+
+
+    <!-- =========================
+         SEARCH BOX
+    ========================= -->
+
+    <div class="search-box">
+
+        <div class="search-title">
+            🔎 Search Available Trains
+        </div>
+
+
+        <form
+            action="/search"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+
+                <!-- FROM -->
+
+                <div class="form-group">
+
+                    <label for="from_station">
+                        From
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="from_station"
+                        name="from_station"
+                        placeholder="Enter source station"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TO -->
+
+                <div class="form-group">
+
+                    <label for="to_station">
+                        To
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="to_station"
+                        name="to_station"
+                        placeholder="Enter destination station"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- JOURNEY DATE -->
+
+                <div class="form-group">
+
+                    <label for="journey_date">
+                        Journey Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="journey_date"
+                        name="journey_date"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TRAVEL CLASS -->
+
+                <div class="form-group">
+
+                    <label for="train_class">
+                        Travel Class
+                    </label>
+
+
+                    <select
+                        id="train_class"
+                        name="train_class"
+                        required
+                    >
+
+                        <option value="">
+                            Select Class
+                        </option>
+
+
+                        <option value="AC Chair Car">
+                            AC Chair Car
+                        </option>
+
+
+                        <option value="AC 3 Tier">
+                            AC 3 Tier
+                        </option>
+
+
+                        <option value="AC 2 Tier">
+                            AC 2 Tier
+                        </option>
+
+
+                        <option value="First AC">
+                            First AC
+                        </option>
+
+
+                        <option value="Sleeper">
+                            Sleeper
+                        </option>
+
+
+                        <option value="Second Sitting">
+                            Second Sitting
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SEARCH BUTTON -->
+
+                <button
+                    type="submit"
+                    class="search-btn"
+                >
+                    Search Trains
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     QUICK SERVICES
+========================= -->
+
+<section class="services">
+
+    <h2 class="section-title">
+        Quick Services
+    </h2>
+
+
+    <div class="service-grid">
+
+
+        <!-- TRAIN STATUS -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🚆
+            </div>
+
+
+            <h3>
+                Train Status
+            </h3>
+
+
+            <p>
+                Check the simulated running status,
+                current station and delay information.
+            </p>
+
+
+            <a href="/train-status">
+                Check Status
+            </a>
+
+        </div>
+
+
+
+        <!-- PNR STATUS -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🎫
+            </div>
+
+
+            <h3>
+                PNR Status
+            </h3>
+
+
+            <p>
+                Check your booking details using
+                your generated project PNR.
+            </p>
+
+
+            <a href="/pnr-status">
+                Check PNR
+            </a>
+
+        </div>
+
+
+
+        <!-- MY BOOKINGS -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📋
+            </div>
+
+
+            <h3>
+                My Bookings
+            </h3>
+
+
+            <p>
+                View your booked trains,
+                seats, fares and journey details.
+            </p>
+
+
+            <a href="/my-bookings">
+                View Bookings
+            </a>
+
+        </div>
+
+
+
+        <!-- MY PROFILE -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                👤
+            </div>
+
+
+            <h3>
+                My Profile
+            </h3>
+
+
+            <p>
+                View your registered name,
+                email and mobile information.
+            </p>
+
+
+            <a href="/profile">
+                View Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     INFORMATION STRIP
+========================= -->
+
+<div class="info-strip">
+
+
+    <div class="info-item">
+
+        <strong>
+            6 Travel Classes
+        </strong>
+
+
+        <span>
+            AC Chair Car, AC 3 Tier, AC 2 Tier,
+            First AC, Sleeper & Second Sitting
+        </span>
+
+    </div>
+
+
+
+    <div class="info-item">
+
+        <strong>
+            Easy Seat Selection
+        </strong>
+
+
+        <span>
+            Choose from available seats
+            before confirming your booking
+        </span>
+
+    </div>
+
+
+
+    <div class="info-item">
+
+        <strong>
+            Project PNR
+        </strong>
+
+
+        <span>
+            Every successful booking receives
+            a unique 10-digit project PNR
+        </span>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        🚆 RailBook - Railway Reservation System
+    </p>
+
+
+    <p>
+        Academic Project | Simulated Railway Booking System
+    </p>
+
+
+    <p>
+        Train running status and booking data are simulated.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     DATE SCRIPT
+========================= -->
+
+<script>
+
+    const dateInput =
+        document.getElementById("journey_date");
+
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    dateInput.min = today;
+
+</script>
+
+
+</body>
+
+</html>

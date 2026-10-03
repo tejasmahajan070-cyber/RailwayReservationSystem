@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PNR Status</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Railway Reservation System
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/my-bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PNR STATUS -->
+
+    <div style="
+        min-height:70vh;
+        padding:70px 20px;
+    ">
+
+        <div style="
+            max-width:600px;
+            margin:auto;
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.10);
+            text-align:center;
+        ">
+
+            <h1 style="
+                color:#173b70;
+                margin-bottom:10px;
+            ">
+                Check PNR Status
+            </h1>
+
+            <p style="
+                color:#666;
+                margin-bottom:30px;
+            ">
+                Enter your 10-digit PNR number to check your booking details.
+            </p>
+
+
+            <form action="/pnr-status" method="POST">
+
+                <div style="
+                    text-align:left;
+                    margin-bottom:20px;
+                ">
+
+                    <label style="
+                        display:block;
+                        font-weight:bold;
+                        margin-bottom:8px;
+                    ">
+                        PNR Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="pnr"
+                        placeholder="Enter 10-digit PNR"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required
+                        style="
+                            width:100%;
+                            padding:14px;
+                            border:1px solid #ccc;
+                            border-radius:7px;
+                            font-size:16px;
+                        "
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="search-btn"
+                    style="margin-top:5px;"
+                >
+                    Check Status
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Railway Reservation System
+
+    </div>
+
+</body>
+
+</html>

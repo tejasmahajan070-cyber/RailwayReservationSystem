@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        Railway Reservation System
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/login">
+            Login
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- REGISTER FORM -->
+
+<div style="
+    min-height:70vh;
+    padding:60px 20px;
+">
+
+    <div style="
+        max-width:500px;
+        margin:auto;
+        background:white;
+        padding:35px;
+        border-radius:12px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.10);
+    ">
+
+
+        <h1 style="
+            text-align:center;
+            color:#173b70;
+            margin-bottom:10px;
+        ">
+            Create Account
+        </h1>
+
+
+        <p style="
+            text-align:center;
+            color:#666;
+            margin-bottom:30px;
+        ">
+            Register to manage your railway bookings
+        </p>
+
+
+        <form action="/register"
+              method="POST">
+
+
+            <!-- NAME -->
+
+            <div class="form-group"
+                 style="margin-bottom:20px;">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group"
+                 style="margin-bottom:20px;">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group"
+                 style="margin-bottom:20px;">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    name="mobile"
+                    placeholder="Enter mobile number"
+                    maxlength="10"
+                    pattern="[6-9][0-9]{9}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group"
+                 style="margin-bottom:25px;">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="search-btn"
+                style="
+                    width:100%;
+                    margin-top:0;
+                "
+            >
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <p style="
+            text-align:center;
+            margin-top:25px;
+            color:#666;
+        ">
+
+            Already have an account?
+
+            <a href="/login"
+               style="
+                   color:#173b70;
+                   font-weight:bold;
+                   text-decoration:none;
+               ">
+                Login
+            </a>
+
+        </p>
+
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    Railway Reservation System
+
+</div>
+
+
+</body>
+
+</html>

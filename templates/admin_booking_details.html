@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Details - RailBook Admin</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        .navbar {
+            background: #173b70;
+            color: white;
+            padding: 15px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logout {
+            background: #dc3545;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .header h1 {
+            color: #173b70;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .ticket {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .ticket-header {
+            background: #173b70;
+            color: white;
+            padding: 20px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-header h2 {
+            font-size: 20px;
+        }
+
+        .pnr {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 25px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+            color: #173b70;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .detail {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 7px;
+        }
+
+        .label {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+
+            padding: 15px;
+            text-align: center;
+        }
+
+        .station {
+            font-size: 20px;
+            font-weight: bold;
+            color: #173b70;
+        }
+
+        .arrow {
+            font-size: 25px;
+            color: #777;
+        }
+
+        .actions {
+            padding: 25px;
+
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: #173b70;
+            color: white;
+        }
+
+        .dashboard-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #173b70;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .route {
+                gap: 12px;
+            }
+
+            .station {
+                font-size: 16px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🚆 RailBook Admin
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/admin-dashboard">
+            Dashboard
+        </a>
+
+        <a href="/admin-users">
+            Users
+        </a>
+
+        <a href="/admin-logout" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Booking Details
+        </h1>
+
+        <p>
+            Detailed information about the selected railway booking.
+        </p>
+
+    </div>
+
+
+    <!-- ================= TICKET ================= -->
+
+    <div class="ticket">
+
+
+        <div class="ticket-header">
+
+            <h2>
+                🎫 Railway Reservation
+            </h2>
+
+            <div class="pnr">
+                PNR: {{ booking.pnr }}
+            </div>
+
+        </div>
+
+
+        <!-- ================= PASSENGER ================= -->
+
+        <div class="section">
+
+            <h3 class="section-title">
+                👤 Passenger Details
+            </h3>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Passenger Name
+                    </div>
+
+                    <div class="value">
+                        {{ booking.passenger_name }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Mobile Number
+                    </div>
+
+                    <div class="value">
+                        {{ booking.mobile }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Age
+                    </div>
+
+                    <div class="value">
+                        {{ booking.age }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Gender
+                    </div>
+
+                    <div class="value">
+                        {{ booking.gender }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= TRAIN ================= -->
+
+        <div class="section">
+
+            <h3 class="section-title">
+                🚆 Train Details
+            </h3>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Train Number
+                    </div>
+
+                    <div class="value">
+                        {{ booking.train_number }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Train Name
+                    </div>
+
+                    <div class="value">
+                        {{ booking.train_name }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Journey Date
+                    </div>
+
+                    <div class="value">
+                        {{ booking.journey_date }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Class
+                    </div>
+
+                    <div class="value">
+                        {{ booking.train_class }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= ROUTE ================= -->
+
+        <div class="section">
+
+            <h3 class="section-title">
+                📍 Journey Route
+            </h3>
+
+
+            <div class="route">
+
+                <div class="station">
+                    {{ booking.from_station }}
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="station">
+                    {{ booking.to_station }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SEAT & FARE ================= -->
+
+        <div class="section">
+
+            <h3 class="section-title">
+                💺 Booking Information
+            </h3>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Seat Number
+                    </div>
+
+                    <div class="value">
+                        {{ booking.seat_number }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Fare
+                    </div>
+
+                    <div class="value">
+                        ₹{{ booking.fare }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        Booking ID
+                    </div>
+
+                    <div class="value">
+                        {{ booking.id }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="label">
+                        PNR Number
+                    </div>
+
+                    <div class="value">
+                        {{ booking.pnr }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= ACTIONS ================= -->
+
+        <div class="actions">
+
+            <a
+                href="/admin-dashboard"
+                class="btn back-btn"
+            >
+                ← Back to Dashboard
+            </a>
+
+
+            <a
+                href="/admin-dashboard"
+                class="btn dashboard-btn"
+            >
+                Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 RailBook Railway Reservation System |
+    Admin Panel
+
+</footer>
+
+
+</body>
+
+</html>

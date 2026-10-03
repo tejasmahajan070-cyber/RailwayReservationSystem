@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Search Results | RailBook</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #173b70;
+            color: white;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc80;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            color: #173b70;
+            font-size: 28px;
+        }
+
+        .search-summary {
+            background: white;
+            padding: 18px 22px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        }
+
+        .search-summary p {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .search-summary strong {
+            color: #173b70;
+        }
+
+        /* ================= TRAIN CARD ================= */
+
+        .train-card {
+            background: white;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            padding: 25px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #e7ebf0;
+        }
+
+        .train-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 18px;
+        }
+
+        .train-name {
+            color: #173b70;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .train-number {
+            color: #777;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .status {
+            background: #e8f7ed;
+            color: #16833d;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* ================= ROUTE ================= */
+
+        .route-section {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .station {
+            text-align: center;
+        }
+
+        .time {
+            font-size: 25px;
+            font-weight: bold;
+            color: #173b70;
+        }
+
+        .station-name {
+            margin-top: 5px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .route-line {
+            text-align: center;
+            color: #e85d04;
+            font-size: 22px;
+        }
+
+        .duration {
+            font-size: 12px;
+            color: #777;
+            display: block;
+            margin-top: 4px;
+            font-weight: bold;
+        }
+
+        /* ================= DETAILS ================= */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: #f7f9fc;
+            padding: 17px;
+            border-radius: 9px;
+        }
+
+        .detail-box {
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #173b70;
+        }
+
+        .fare {
+            color: #e85d04;
+            font-size: 19px;
+        }
+
+        .available {
+            color: #16833d;
+        }
+
+        /* ================= CLASSES ================= */
+
+        .classes {
+            margin-top: 18px;
+        }
+
+        .classes-title {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .class-badge {
+            display: inline-block;
+            background: #eef3f8;
+            color: #173b70;
+            padding: 7px 12px;
+            border-radius: 6px;
+            margin-right: 5px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .select-section {
+            text-align: right;
+            margin-top: 22px;
+        }
+
+        .select-btn {
+            display: inline-block;
+            background: #e85d04;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .select-btn:hover {
+            background: #c94d00;
+        }
+
+        /* ================= NO RESULT ================= */
+
+        .no-result {
+            background: white;
+            padding: 55px 25px;
+            text-align: center;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .no-result h2 {
+            color: #173b70;
+            margin-bottom: 10px;
+        }
+
+        .no-result p {
+            color: #666;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #e85d04;
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            margin-top: 50px;
+            background: #173b70;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 14px 5%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .train-card {
+                padding: 18px;
+            }
+
+            .train-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .status {
+                align-self: flex-start;
+            }
+
+            .route-section {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .route-line {
+                transform: rotate(90deg);
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .select-section {
+                text-align: center;
+            }
+
+            .select-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🚆 RailBook
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/pnr-status">
+            PNR Status
+        </a>
+
+        <a href="/my-bookings">
+            My Bookings
+        </a>
+
+        <a href="/profile">
+            Profile
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <h1 class="page-title">
+        Available Trains
+    </h1>
+
+
+    <!-- ================= SEARCH SUMMARY ================= -->
+
+    <div class="search-summary">
+
+        <p>
+            <strong>From:</strong>
+            {{ from_station }}
+        </p>
+
+        <p>
+            <strong>To:</strong>
+            {{ to_station }}
+        </p>
+
+        <p>
+            <strong>Journey Date:</strong>
+            {{ journey_date }}
+        </p>
+
+        <p>
+            <strong>Class:</strong>
+            {{ train_class }}
+        </p>
+
+    </div>
+
+
+    {% if trains %}
+
+
+        {% for train in trains %}
+
+
+        <!-- ================= TRAIN CARD ================= -->
+
+        <div class="train-card">
+
+
+            <!-- ================= TRAIN TOP ================= -->
+
+            <div class="train-top">
+
+                <div>
+
+                    <div class="train-name">
+                        {{ train.name }}
+                    </div>
+
+                    <div class="train-number">
+                        Train No. {{ train.number }}
+                    </div>
+
+                </div>
+
+
+                <div class="status">
+                    {{ train.status }}
+                </div>
+
+            </div>
+
+
+            <!-- ================= ROUTE ================= -->
+
+            <div class="route-section">
+
+
+                <div class="station">
+
+                    <div class="time">
+                        {{ train.departure }}
+                    </div>
+
+                    <div class="station-name">
+                        {{ train.from }}
+                    </div>
+
+                </div>
+
+
+                <div class="route-line">
+
+                    ───── 🚆 ─────
+
+                    <span class="duration">
+
+                        {% if train.duration %}
+
+                            {{ train.duration }}
+
+                        {% else %}
+
+                            Not Available
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <div class="station">
+
+                    <div class="time">
+                        {{ train.arrival }}
+                    </div>
+
+                    <div class="station-name">
+                        {{ train.to }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= DETAILS ================= -->
+
+            <div class="details-grid">
+
+
+                <!-- DURATION -->
+
+                <div class="detail-box">
+
+                    <div class="detail-label">
+                        Duration
+                    </div>
+
+                    <div class="detail-value">
+
+                        {% if train.duration %}
+
+                            {{ train.duration }}
+
+                        {% else %}
+
+                            Not Available
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- AVAILABLE SEATS -->
+
+                <div class="detail-box">
+
+                    <div class="detail-label">
+                        Available Seats
+                    </div>
+
+                    <div class="detail-value available">
+
+                        {{ train.seats }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- FARE -->
+
+                <div class="detail-box">
+
+                    <div class="detail-label">
+                        Fare / Passenger
+                    </div>
+
+                    <div class="detail-value fare">
+
+                        {% if train.fare %}
+
+                            ₹{{ train.fare }}
+
+                        {% else %}
+
+                            ₹{{ 0 }}
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= CLASSES ================= -->
+
+            <div class="classes">
+
+                <div class="classes-title">
+                    Available Class
+                </div>
+
+
+                {% for class_name in train.classes %}
+
+                    <span class="class-badge">
+                        {{ class_name }}
+                    </span>
+
+                {% endfor %}
+
+
+            </div>
+
+
+            <!-- ================= SELECT TRAIN ================= -->
+
+            <div class="select-section">
+
+                <form
+                    action="/passenger-details"
+                    method="POST"
+                >
+
+                    <input
+                        type="hidden"
+                        name="train_number"
+                        value="{{ train.number }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="train_name"
+                        value="{{ train.name }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="from_station"
+                        value="{{ from_station }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="to_station"
+                        value="{{ to_station }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="journey_date"
+                        value="{{ journey_date }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="train_class"
+                        value="{{ train_class }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="fare"
+                        value="{{ train.fare }}"
+                    >
+
+                    <button
+                        type="submit"
+                        class="select-btn"
+                    >
+                        Select Train →
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- ================= NO RESULT ================= -->
+
+        <div class="no-result">
+
+            <h2>
+                No Trains Found
+            </h2>
+
+            <p>
+                No trains are available for the selected
+                route and class.
+            </p>
+
+            <a
+                href="/"
+                class="back-btn"
+            >
+                Search Again
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+    Railway Reservation System
+
+</div>
+
+
+</body>
+
+</html>

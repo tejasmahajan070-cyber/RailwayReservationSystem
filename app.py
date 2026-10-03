@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 import random
-
+import os
 
 app = Flask(__name__)
 app.secret_key = "railbook_demo_secret_key"
@@ -13,10 +13,11 @@ app.secret_key = "railbook_demo_secret_key"
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="railway_db"
+        host=os.environ.get("MYSQLHOST"),
+        port=int(os.environ.get("MYSQLPORT", 3306)),
+        user=os.environ.get("MYSQLUSER"),
+        password=os.environ.get("MYSQLPASSWORD"),
+        database=os.environ.get("MYSQLDATABASE")
     )
 
 

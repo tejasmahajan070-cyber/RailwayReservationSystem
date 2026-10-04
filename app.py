@@ -148,9 +148,12 @@ trains = [
         "duration": "3h 25m",
         "class": "AC Chair Car",
         "classes": [
-            "AC Chair Car",
-            "Second Sitting"
-        ],
+    "AC Chair Car",
+    "Second Sitting",
+    "Sleeper",
+    "AC 3 Tier",
+    "AC 2 Tier"
+],
         "seats": 24,
         "status": "Running"
     },
@@ -301,8 +304,11 @@ trains = [
         "duration": "3h 40m",
         "class": "Sleeper",
         "classes": [
-            "Sleeper"
-        ],
+    "Sleeper",
+    "AC 3 Tier",
+    "AC 2 Tier",
+    "First AC"
+],
         "seats": 24,
         "status": "Running"
     },

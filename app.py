@@ -218,8 +218,12 @@ trains = [
         "duration": "3h 30m",
         "class": "Second Sitting",
         "classes": [
-            "Second Sitting"
-        ],
+    "AC Chair Car",
+    "Second Sitting",
+    "AC 3 Tier",
+    "AC 2 Tier",
+    "First AC"
+],
         "seats": 24,
         "status": "Running"
     },

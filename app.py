@@ -248,8 +248,11 @@ trains = [
         "duration": "3h 50m",
         "class": "Sleeper",
         "classes": [
-            "Sleeper"
-        ],
+                    "Sleeper",
+                    "AC 3 Tier",
+                    "AC 2 Tier",
+                    "First AC"
+                ],
         "seats": 24,
         "status": "Running"
     },
@@ -704,11 +707,12 @@ def search():
         normalize(train_class_input),
         train_class_input
     )
+    print("SELECTED CLASS:", repr(train_class_input))
+    print("FINAL CLASS:", repr(train_class))
 
     results = []
 
     db = get_db_connection()
-
     cursor = db.cursor()
 
     for train in trains:
@@ -723,10 +727,16 @@ def search():
             normalize(to_station)
         )
 
-        class_match = (
-            normalize(train["class"])
-            ==
+        available_classes = train.get(
+            "classes",
+            [train.get("class", "")]
+        )
+
+        class_match = any(
             normalize(train_class)
+            ==
+            normalize(available_class)
+            for available_class in available_classes
         )
 
         if route_match and class_match:
@@ -747,59 +757,35 @@ def search():
 
             train_copy = train.copy()
 
-            # ---------------------------------------------
-            # AVAILABLE SEATS
-            # ---------------------------------------------
+            train_copy["class"] = train_class
 
             train_copy["seats"] = max(
                 0,
                 24 - booked_count
             )
 
-            # ---------------------------------------------
-            # FARE
-            # ---------------------------------------------
-
             train_copy["fare"] = get_fare(
                 train_class
             )
-
-            # ---------------------------------------------
-            # DURATION
-            # ---------------------------------------------
 
             train_copy["duration"] = train.get(
                 "duration",
                 "Not Available"
             )
 
-            # ---------------------------------------------
-            # CLASSES
-            # ---------------------------------------------
+            train_copy["classes"] = available_classes
 
-            train_copy["classes"] = train.get(
-                "classes",
-                [train_class]
-            )
-
-            results.append(
-                train_copy
-            )
+            results.append(train_copy)
 
     cursor.close()
     db.close()
 
     return render_template(
         "search_results.html",
-
         trains=results,
-
         from_station=from_station,
-
         to_station=to_station,
-
         journey_date=journey_date,
-
         train_class=train_class
     )
 

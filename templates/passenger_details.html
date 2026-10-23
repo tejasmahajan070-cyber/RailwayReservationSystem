@@ -352,17 +352,20 @@
 
                         <div class="form-group">
 
-                            <label>
-                                Age
-                            </label>
+                            <label for="age">Passenger Age</label>
 
-                            <input
-                                type="number"
-                                name="age[]"
-                                min="10"
-                                max="100"
-                                placeholder="Enter age"
-                                required>
+<input
+    type="number"
+    id="age"
+    name="age"
+    placeholder="Enter age"
+    min="19"
+    max="120"
+    step="1"
+    oninput="this.setCustomValidity('')"
+    oninvalid="this.setCustomValidity('Passenger age must be above 18 years')"
+    required
+>
 
                         </div>
 

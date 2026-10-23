@@ -335,13 +335,18 @@
 
                             <label>
                                 Passenger Name
-                            </label>
+                            <label for="passenger_name">Passenger Name</label>
 
-                            <input
-                                type="text"
-                                name="passenger_name[]"
-                                placeholder="Enter passenger name"
-                                required>
+<input
+    type="text"
+    id="passenger_name"
+    name="passenger_name"
+    placeholder="Enter passenger name"
+    pattern="[A-Za-z ]+"
+    title="Name must contain only letters and spaces"
+    oninput="this.value = this.value.replace(/[^A-Za-z ]/g, '')"
+    required
+>
 
                         </div>
 

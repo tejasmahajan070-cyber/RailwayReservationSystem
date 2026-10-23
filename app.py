@@ -356,7 +356,7 @@ trains = [
     
     # 1. Mumbai <-> Surat
     {
-        "number": "RB101",
+        "number": "06101",
         "name": "RailBook Western Express",
         "from": "Mumbai",
         "to": "Surat",
@@ -369,7 +369,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB102",
+        "number": "85102",
         "name": "RailBook Western Express",
         "from": "Surat",
         "to": "Mumbai",
@@ -384,7 +384,7 @@ trains = [
 
     # 2. Mumbai <-> Ahmedabad
     {
-        "number": "RB103",
+        "number": "45103",
         "name": "RailBook Gujarat Express",
         "from": "Mumbai",
         "to": "Ahmedabad",
@@ -397,7 +397,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB104",
+        "number": "69104",
         "name": "RailBook Gujarat Express",
         "from": "Ahmedabad",
         "to": "Mumbai",
@@ -412,7 +412,7 @@ trains = [
 
     # 3. Mumbai <-> Delhi
     {
-        "number": "RB105",
+        "number": "55105",
         "name": "RailBook Capital Express",
         "from": "Mumbai",
         "to": "Delhi",
@@ -425,7 +425,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB106",
+        "number": "00106",
         "name": "RailBook Capital Express",
         "from": "Delhi",
         "to": "Mumbai",
@@ -440,7 +440,7 @@ trains = [
 
     # 4. Mumbai <-> Jaipur
     {
-        "number": "RB107",
+        "number": "91107",
         "name": "RailBook Pink City Express",
         "from": "Mumbai",
         "to": "Jaipur",
@@ -453,7 +453,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB108",
+        "number": "76108",
         "name": "RailBook Pink City Express",
         "from": "Jaipur",
         "to": "Mumbai",
@@ -468,7 +468,7 @@ trains = [
 
     # 5. Mumbai <-> Hyderabad
     {
-        "number": "RB109",
+        "number": "90109",
         "name": "RailBook Deccan Express",
         "from": "Mumbai",
         "to": "Hyderabad",
@@ -481,7 +481,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB110",
+        "number": "35110",
         "name": "RailBook Deccan Express",
         "from": "Hyderabad",
         "to": "Mumbai",
@@ -496,7 +496,7 @@ trains = [
 
     # 6. Mumbai <-> Bengaluru
     {
-        "number": "RB111",
+        "number": "10111",
         "name": "RailBook Southern Express",
         "from": "Mumbai",
         "to": "Bengaluru",
@@ -509,7 +509,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB112",
+        "number": "98112",
         "name": "RailBook Southern Express",
         "from": "Bengaluru",
         "to": "Mumbai",
@@ -524,7 +524,7 @@ trains = [
 
     # 7. Mumbai <-> Chennai
     {
-        "number": "RB113",
+        "number": "89113",
         "name": "RailBook Coastal Express",
         "from": "Mumbai",
         "to": "Chennai",
@@ -537,7 +537,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB114",
+        "number": "44114",
         "name": "RailBook Coastal Express",
         "from": "Chennai",
         "to": "Mumbai",
@@ -552,7 +552,7 @@ trains = [
 
     # 8. Mumbai <-> Goa
     {
-        "number": "RB115",
+        "number": "78115",
         "name": "RailBook Konkan Express",
         "from": "Mumbai",
         "to": "Goa",
@@ -565,7 +565,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB116",
+        "number": "11116",
         "name": "RailBook Konkan Express",
         "from": "Goa",
         "to": "Mumbai",
@@ -580,7 +580,7 @@ trains = [
 
     # 9. Mumbai <-> Nagpur
     {
-        "number": "RB117",
+        "number": "09117",
         "name": "RailBook Vidarbha Express",
         "from": "Mumbai",
         "to": "Nagpur",
@@ -593,7 +593,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB118",
+        "number": "90118",
         "name": "RailBook Vidarbha Express",
         "from": "Nagpur",
         "to": "Mumbai",
@@ -608,7 +608,7 @@ trains = [
 
     # 10. Mumbai <-> Indore
     {
-        "number": "RB119",
+        "number": "56119",
         "name": "RailBook Malwa Express",
         "from": "Mumbai",
         "to": "Indore",
@@ -621,7 +621,7 @@ trains = [
         "status": "Running"
     },
     {
-        "number": "RB120",
+        "number": "99120",
         "name": "RailBook Malwa Express",
         "from": "Indore",
         "to": "Mumbai",
@@ -636,7 +636,7 @@ trains = [
 
     # 1. Delhi <-> Jaipur
     {
-        "number": "RB201", "name": "Capital Pink City Express",
+        "number": "54201", "name": "Capital Pink City Express",
         "from": "Delhi", "to": "Jaipur",
         "departure": "06:00", "arrival": "11:00",
         "duration": "5h", "class": "AC Chair Car",
@@ -644,7 +644,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB202", "name": "Capital Pink City Express",
+        "number": "78202", "name": "Capital Pink City Express",
         "from": "Jaipur", "to": "Delhi",
         "departure": "15:00", "arrival": "20:00",
         "duration": "5h", "class": "AC Chair Car",
@@ -654,7 +654,7 @@ trains = [
 
     # 2. Delhi <-> Agra
     {
-        "number": "RB203", "name": "Taj City Express",
+        "number": "65203", "name": "Taj City Express",
         "from": "Delhi", "to": "Agra",
         "departure": "07:00", "arrival": "10:00",
         "duration": "3h", "class": "AC Chair Car",
@@ -662,7 +662,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB204", "name": "Taj City Express",
+        "number": "11204", "name": "Taj City Express",
         "from": "Agra", "to": "Delhi",
         "departure": "16:00", "arrival": "19:00",
         "duration": "3h", "class": "AC Chair Car",
@@ -672,7 +672,7 @@ trains = [
 
     # 3. Delhi <-> Lucknow
     {
-        "number": "RB205", "name": "Awadh Express",
+        "number": "81205", "name": "Awadh Express",
         "from": "Delhi", "to": "Lucknow",
         "departure": "18:00", "arrival": "06:00",
         "duration": "12h", "class": "Sleeper",
@@ -680,7 +680,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB206", "name": "Awadh Express",
+        "number": "08206", "name": "Awadh Express",
         "from": "Lucknow", "to": "Delhi",
         "departure": "18:30", "arrival": "06:30",
         "duration": "12h", "class": "Sleeper",
@@ -690,7 +690,7 @@ trains = [
 
     # 4. Delhi <-> Varanasi
     {
-        "number": "RB207", "name": "Kashi Express",
+        "number": "29207", "name": "Kashi Express",
         "from": "Delhi", "to": "Varanasi",
         "departure": "17:00", "arrival": "05:00",
         "duration": "12h", "class": "Sleeper",
@@ -698,7 +698,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB208", "name": "Kashi Express",
+        "number": "23208", "name": "Kashi Express",
         "from": "Varanasi", "to": "Delhi",
         "departure": "18:00", "arrival": "06:00",
         "duration": "12h", "class": "Sleeper",
@@ -708,7 +708,7 @@ trains = [
 
     # 5. Pune <-> Hyderabad
     {
-        "number": "RB209", "name": "Deccan Connect Express",
+        "number": "20209", "name": "Deccan Connect Express",
         "from": "Pune", "to": "Hyderabad",
         "departure": "18:00", "arrival": "07:00",
         "duration": "13h", "class": "Sleeper",
@@ -716,7 +716,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB210", "name": "Deccan Connect Express",
+        "number": "45210", "name": "Deccan Connect Express",
         "from": "Hyderabad", "to": "Pune",
         "departure": "18:30", "arrival": "07:30",
         "duration": "13h", "class": "Sleeper",
@@ -726,7 +726,7 @@ trains = [
 
     # 6. Hyderabad <-> Bengaluru
     {
-        "number": "RB211", "name": "Southern Connect Express",
+        "number": "34211", "name": "Southern Connect Express",
         "from": "Hyderabad", "to": "Bengaluru",
         "departure": "20:00", "arrival": "07:00",
         "duration": "11h", "class": "Sleeper",
@@ -734,7 +734,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB212", "name": "Southern Connect Express",
+        "number": "87212", "name": "Southern Connect Express",
         "from": "Bengaluru", "to": "Hyderabad",
         "departure": "20:30", "arrival": "07:30",
         "duration": "11h", "class": "Sleeper",
@@ -744,7 +744,7 @@ trains = [
 
     # 7. Bengaluru <-> Chennai
     {
-        "number": "RB213", "name": "Garden City Express",
+        "number": "00213", "name": "Garden City Express",
         "from": "Bengaluru", "to": "Chennai",
         "departure": "06:00", "arrival": "12:00",
         "duration": "6h", "class": "AC Chair Car",
@@ -752,7 +752,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB214", "name": "Garden City Express",
+        "number": "90214", "name": "Garden City Express",
         "from": "Chennai", "to": "Bengaluru",
         "departure": "15:00", "arrival": "21:00",
         "duration": "6h", "class": "AC Chair Car",
@@ -762,7 +762,7 @@ trains = [
 
     # 8. Chennai <-> Hyderabad
     {
-        "number": "RB215", "name": "Coromandel Connect Express",
+        "number": "12215", "name": "Coromandel Connect Express",
         "from": "Chennai", "to": "Hyderabad",
         "departure": "18:00", "arrival": "07:00",
         "duration": "13h", "class": "Sleeper",
@@ -770,7 +770,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB216", "name": "Coromandel Connect Express",
+        "number": "88216", "name": "Coromandel Connect Express",
         "from": "Hyderabad", "to": "Chennai",
         "departure": "18:30", "arrival": "07:30",
         "duration": "13h", "class": "Sleeper",
@@ -780,7 +780,7 @@ trains = [
 
     # 9. Ahmedabad <-> Jaipur
     {
-        "number": "RB217", "name": "Desert Connect Express",
+        "number": "77217", "name": "Desert Connect Express",
         "from": "Ahmedabad", "to": "Jaipur",
         "departure": "17:00", "arrival": "06:00",
         "duration": "13h", "class": "Sleeper",
@@ -788,7 +788,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB218", "name": "Desert Connect Express",
+        "number": "32218", "name": "Desert Connect Express",
         "from": "Jaipur", "to": "Ahmedabad",
         "departure": "17:30", "arrival": "06:30",
         "duration": "13h", "class": "Sleeper",
@@ -798,7 +798,7 @@ trains = [
 
     # 10. Nagpur <-> Hyderabad
     {
-        "number": "RB219", "name": "Central Deccan Express",
+        "number": "23219", "name": "Central Deccan Express",
         "from": "Nagpur", "to": "Hyderabad",
         "departure": "19:00", "arrival": "06:00",
         "duration": "11h", "class": "Sleeper",
@@ -806,7 +806,7 @@ trains = [
         "seats": 24, "status": "Running"
     },
     {
-        "number": "RB220", "name": "Central Deccan Express",
+        "number": "22220", "name": "Central Deccan Express",
         "from": "Hyderabad", "to": "Nagpur",
         "departure": "19:30", "arrival": "06:30",
         "duration": "11h", "class": "Sleeper",

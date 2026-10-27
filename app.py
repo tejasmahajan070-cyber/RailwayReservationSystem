@@ -943,7 +943,148 @@ train_status = {
         "next": "Lonavala",
         "delay": "4 Minutes Late",
         "platform": "Platform 1"
-    }
+    },
+    "06101": {
+        "status": "Running",
+        "current": "Borivali",
+        "next": "Vapi",
+        "delay": "On Time",
+        "platform": "Platform 3"
+    },
+    "85102": {
+        "status": "Running",
+        "current": "Dwarka",
+        "next": "Bhatiya",
+        "delay": "1 Hour Late",
+        "platform": "Platform 5"
+    },
+    "45103": {
+        "status": "Running",
+        "current": "Vadodara Jn",
+        "next": "Anand Jn",
+        "delay": "10 Minutes Early",
+        "platform": "Platform 1"
+    },
+    "69104": {
+        "status": "Running",
+        "current": "Ahmedabad Jn",
+        "next": "Surat",
+        "delay": "4 Minutes Early",
+        "platform": "Platform 2"
+    },
+    "55105": {
+        "status": "Running",
+        "current": "Mangal Mahudi",
+        "next": "Ratlam Jn",
+        "delay": "4 Minutes Late",
+        "platform": "Platform 3"
+    },
+    "00106": {
+        "status": "Running",
+        "current": "Mathura Jn",
+        "next": "Bharatpur Jn",
+        "delay": "On Time",
+        "platform": "Platform 5"
+    },
+    "91107": {
+        "status": "Running",
+        "current": "CSMT",
+        "next": "Valsad",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
+    "76108": {
+        "status": "Running",
+        "current": "Ajmer Jn",
+        "next": "Chittaurgarh",
+        "delay": "30 Minutes Late",
+        "platform": "Platform 1"
+    },
+    "90109": {
+        "status": "Running",
+        "current": "Solapur Jn",
+        "next": "Vikarabad Jn",
+        "delay": "On Time",
+        "platform": "Platform 2"
+    },
+    "35110": {
+        "status": "Running",
+        "current": "Secundarabad Jn",
+        "next": "Wadi",
+        "delay": "30 Minutes Early",
+        "platform": "Platform 6"
+    },
+    "10111": {
+        "status": "Running",
+        "current": "Pune Jn",
+        "next": "Daund Jn",
+        "delay": "On Time",
+        "platform": "Platform 3"
+    },
+    "98112": {
+        "status": "Running",
+        "current": "Penukoda",
+        "next": "Dharmavaram Jn",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
+    "89113": {
+        "status": "Running",
+        "current": "Thane",
+        "next": "Kalyan Jn",
+        "delay": "1 Minutes Late",
+        "platform": "Platform 4"
+    },
+    "44114": {
+        "status": "Running",
+        "current": "Arakkonam Jn",
+        "next": "Puttur",
+        "delay": "4 Minutes Late",
+        "platform": "Platform 1"
+    },
+    "78115": {
+        "status": "Running",
+        "current": "Panvel",
+        "next": "Madgaon",
+        "delay": "4 Minutes Early",
+        "platform": "Platform 6"
+    },
+    "11116": {
+        "status": "Running",
+        "current": "Madgaon",
+        "next": "Panvel",
+        "delay": "45 Minutes Late",
+        "platform": "Platform 1"
+    },
+    "09117": {
+        "status": "Running",
+        "current": "Igatpuri Jn",
+        "next": "Bhusaval Jn",
+        "delay": "16 Minutes Late",
+        "platform": "Platform 2"
+    },
+    "90118": {
+        "status": "Running",
+        "current": "Akola Jn",
+        "next": "Manmad Jn",
+        "delay": "16 Minutes Late",
+        "platform": "Platform 4"
+    },
+    "56119": {
+        "status": "Running",
+        "current": "Vasai Road",
+        "next": "Godhra Jn",
+        "delay": "15 Minutes Early",
+        "platform": "Platform 4"
+    },
+    "99120": {
+        "status": "Running",
+        "current": "Ujjain Jn",
+        "next": "Nagda Jn",
+        "delay": "20 Minutes Early",
+        "platform": "Platform 6"
+    },
+  
 }
 
 

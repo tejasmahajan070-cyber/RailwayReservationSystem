@@ -1984,7 +1984,7 @@ def book():
         return redirect("/login")
 
     if not session.get("demo_payment_success"):
-    return redirect("/")    
+        return redirect("/")    
 
     user_id = session["user_id"]
 

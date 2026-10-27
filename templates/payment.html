@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Payment | RailBook</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f2f5fb;color:#17243b;font-family:Arial,sans-serif}
+.wrap{max-width:1050px;margin:35px auto;padding:16px;display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+.panel{background:white;padding:25px;border-radius:18px;box-shadow:0 12px 35px #173b7018}
+h1{color:#173b70;margin-top:0}
+.note{background:#fff4d5;padding:14px;border-radius:10px;font-size:13px;line-height:1.5}
+.method{display:flex;align-items:center;gap:12px;padding:15px;margin:10px 0;border:1px solid #dce3ed;border-radius:12px;cursor:pointer}
+.method:has(input:checked){border-color:#245bb3;background:#eff5ff}
+.method input{accent-color:#245bb3}
+.method strong,.method small{display:block}
+.method small{color:#68758a;margin-top:4px}
+.details{display:none;background:#f6f8fc;padding:15px;border-radius:10px;margin:12px 0}
+.details.active{display:block}
+.details input,.details select{width:100%;padding:12px;border:1px solid #ccd4e0;border-radius:8px;margin:7px 0}
+.qr{width:130px;height:130px;margin:15px auto;background:repeating-conic-gradient(#17243b 0 25%,white 0 50%) 50%/14px 14px;border:7px solid white;position:relative}
+.qr:after{content:"DEMO";position:absolute;top:48px;left:35px;background:white;padding:5px;font-weight:bold}
+.pay{width:100%;border:0;padding:15px;border-radius:10px;background:#e85d04;color:white;font-weight:bold;font-size:16px;cursor:pointer;margin-top:12px}
+.pay:hover{background:#c94d00}
+.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee;font-size:14px}
+.total{font-size:21px;color:#16834a;font-weight:bold}
+@media(max-width:750px){.wrap{grid-template-columns:1fr;margin:10px auto}.panel{padding:18px}}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<section class="panel">
+<h1>Complete Your Booking</h1>
+<p>Choose a payment option to simulate your RailBook payment.</p>
+
+<div class="note">
+<strong>DEMO MODE ONLY</strong><br>
+No real payment will be made. Do not enter real card, bank or UPI credentials. This page does not connect to any payment gateway.
+</div>
+
+<form action="{{ url_for('process_demo_payment') }}" method="POST" id="paymentForm">
+
+<label class="method">
+<input type="radio" name="payment_method" value="upi" required>
+<span>📱 <strong>UPI</strong><small>Demo UPI ID</small></span>
+</label>
+
+<label class="method">
+<input type="radio" name="payment_method" value="qr">
+<span>▦ <strong>QR Code</strong><small>Illustrative QR, not payable</small></span>
+</label>
+
+<label class="method">
+<input type="radio" name="payment_method" value="card">
+<span>💳 <strong>Debit / Credit Card</strong><small>Fictional test details only</small></span>
+</label>
+
+<label class="method">
+<input type="radio" name="payment_method" value="netbanking">
+<span>🏦 <strong>Net Banking</strong><small>Demo bank selection</small></span>
+</label>
+
+<div class="details" id="upi">
+<label>Demo UPI ID</label>
+<input type="text" placeholder="demo@upi" autocomplete="off">
+</div>
+
+<div class="details" id="qr">
+<div class="qr"></div>
+<p align="center">Demo QR pattern only. It cannot accept money.</p>
+</div>
+
+<div class="details" id="card">
+<label>Fictional Card Number</label>
+<input type="text" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="off">
+<label>Name on Card</label>
+<input type="text" placeholder="DEMO USER" autocomplete="off">
+<label>Expiry (MM/YY)</label>
+<input type="text" placeholder="MM/YY" maxlength="5" autocomplete="off">
+<label>Fictional CVV</label>
+<input type="password" placeholder="123" maxlength="4" autocomplete="off">
+<p>Use fictional values only. These fields are not sent to a payment provider.</p>
+</div>
+
+<div class="details" id="netbanking">
+<label>Select Demo Bank</label>
+<select>
+<option>Choose a demo bank</option>
+<option>Demo National Bank</option>
+<option>Sample State Bank</option>
+<option>RailBook Test Bank</option>
+</select>
+<p>No bank login or redirection will happen.</p>
+</div>
+
+<button class="pay" type="submit">
+Simulate Successful Payment · ₹{{ '%.2f'|format(total_fare) }}
+</button>
+<p align="center">🔒 Demo only · No real money will be charged</p>
+</form>
+</section>
+
+<aside class="panel">
+<h2>Booking Summary</h2>
+<div class="row"><span>Train</span><strong>{{ train_number }} · {{ train_name }}</strong></div>
+<div class="row"><span>Route</span><strong>{{ from_station }} → {{ to_station }}</strong></div>
+<div class="row"><span>Journey date</span><strong>{{ journey_date }}</strong></div>
+<div class="row"><span>Class</span><strong>{{ train_class }}</strong></div>
+<div class="row"><span>Passengers</span><strong>{{ passenger_count }}</strong></div>
+<div class="row"><span>Fare per passenger</span><strong>₹{{ '%.2f'|format(fare_per_passenger) }}</strong></div>
+<div class="row"><span>Total demo amount</span><strong class="total">₹{{ '%.2f'|format(total_fare) }}</strong></div>
+<p>Your ticket and PNR will be generated after this demo step.</p>
+</aside>
+
+</div>
+
+<script>
+const options = {
+  upi: "upi",
+  qr: "qr",
+  card: "card",
+  netbanking: "netbanking"
+};
+
+document.querySelectorAll('input[name="payment_method"]').forEach(function(radio){
+  radio.addEventListener("change", function(){
+    document.querySelectorAll(".details").forEach(function(el){
+      el.classList.remove("active");
+    });
+    document.getElementById(options[this.value]).classList.add("active");
+  });
+});
+
+document.getElementById("paymentForm").addEventListener("submit", function(event){
+  const selected = document.querySelector('input[name="payment_method"]:checked');
+
+  if(!selected){
+    event.preventDefault();
+    alert("Please select a demo payment option.");
+    return;
+  }
+
+  if(!confirm("This is a demo only. Simulate payment and create your ticket?")){
+    event.preventDefault();
+  }
+});
+</script>
+</body>
+</html>

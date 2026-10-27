@@ -1850,10 +1850,141 @@ def seat_selection():
     "/book-train",
     methods=["POST"]
 )
+# =========================================================
+# DEMO PAYMENT ROUTES - NO REAL MONEY
+# =========================================================
+
+@app.route("/payment", methods=["POST"])
+def payment_page():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    # Keep all submitted form values, including repeated fields
+    booking_data = {
+        key: list(values)
+        for key, values in request.form.lists()
+    }
+
+    passenger_names = booking_data.get(
+        "passenger_name[]", []
+    )
+
+    if not passenger_names:
+        old_name = booking_data.get(
+            "passenger_name", [""]
+        )[0]
+        passenger_names = [old_name] if old_name else []
+
+    seat_numbers = booking_data.get(
+        "seat_number[]", []
+    )
+
+    if not seat_numbers:
+        old_seat = booking_data.get(
+            "seat_number", [""]
+        )[0]
+        seat_numbers = [old_seat] if old_seat else []
+
+    if not passenger_names:
+        return """
+        <script>
+            alert('Passenger details missing.');
+            history.back();
+        </script>
+        """
+
+    if len(passenger_names) != len(seat_numbers):
+        return """
+        <script>
+            alert('Please select one seat per passenger.');
+            history.back();
+        </script>
+        """
+
+    train_class_input = booking_data.get(
+        "train_class", [""]
+    )[0]
+
+    train_class = class_aliases.get(
+        normalize(train_class_input),
+        train_class_input
+    )
+
+    booking_data["train_class"] = [train_class]
+
+    # Calculate fare on the server
+    fare_per_passenger = float(get_fare(train_class))
+    total_fare = fare_per_passenger * len(passenger_names)
+
+    booking_data["fare"] = [str(fare_per_passenger)]
+
+    # Store booking details until demo payment completes
+    session["pending_booking"] = booking_data
+    session["demo_payment_success"] = False
+
+    return render_template(
+        "payment.html",
+        booking_data=booking_data,
+        train_name=booking_data.get("train_name", ["Train"])[0],
+        train_number=booking_data.get("train_number", [""])[0],
+        from_station=booking_data.get("from_station", [""])[0],
+        to_station=booking_data.get("to_station", [""])[0],
+        journey_date=booking_data.get("journey_date", [""])[0],
+        train_class=train_class,
+        passenger_count=len(passenger_names),
+        fare_per_passenger=fare_per_passenger,
+        total_fare=total_fare
+    )
+
+
+@app.route("/process-demo-payment", methods=["POST"])
+def process_demo_payment():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    booking_data = session.get("pending_booking")
+
+    if not booking_data:
+        return redirect("/")
+
+    payment_method = request.form.get(
+        "payment_method", ""
+    ).strip().lower()
+
+    allowed_methods = {
+        "upi", "qr", "card", "netbanking"
+    }
+
+    if payment_method not in allowed_methods:
+        return """
+        <script>
+            alert('Please select a demo payment option.');
+            history.back();
+        </script>
+        """
+
+    # Simulation only. No bank or payment gateway is contacted.
+    session["demo_payment_success"] = True
+
+    method_labels = {
+        "upi": "UPI (Demo)",
+        "qr": "QR Code (Demo)",
+        "card": "Debit/Credit Card (Demo)",
+        "netbanking": "Net Banking (Demo)"
+    }
+
+    return render_template(
+        "payment_success.html",
+        booking_data=booking_data,
+        payment_method=method_labels[payment_method]
+    )
 def book():
 
     if "user_id" not in session:
         return redirect("/login")
+
+    if not session.get("demo_payment_success"):
+    return redirect("/")    
 
     user_id = session["user_id"]
 
@@ -1912,6 +2043,8 @@ def book():
         fare_per_passenger = get_fare(
             train_class
         )
+
+    
 
     # -----------------------------------------------------
     # PASSENGER DETAILS

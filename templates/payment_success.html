@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful | RailBook</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#eaf8ef,#eef3ff);font-family:Arial,sans-serif;color:#17243b;padding:20px}
+.card{width:min(520px,100%);background:white;border-radius:24px;padding:35px 25px;text-align:center;box-shadow:0 20px 60px #173b7020;position:relative;z-index:2}
+.check{width:100px;height:100px;border-radius:50%;background:#e2f8e9;color:#16834a;margin:0 auto 20px;display:grid;place-items:center;font-size:58px;font-weight:bold;animation:pop .65s ease-out}
+h1{color:#16834a;margin-bottom:10px}
+p{color:#64748b;line-height:1.6}
+.pill{display:inline-block;background:#edf4ff;color:#245bb3;padding:10px 16px;border-radius:30px;font-weight:bold;font-size:13px}
+.ticket{font-size:42px;margin:15px}
+.progress{height:7px;background:#e5eaf1;border-radius:20px;overflow:hidden;margin:24px 0 10px}
+.progress span{display:block;width:0;height:100%;background:#16834a;animation:load 4s linear forwards}
+button{background:#173b70;color:white;border:0;border-radius:9px;padding:12px 20px;font-weight:bold;cursor:pointer}
+.confetti{position:fixed;top:-20px;width:9px;height:15px;z-index:1;animation:fall 3s linear forwards}
+@keyframes pop{0%{transform:scale(.2);opacity:0}75%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+@keyframes load{to{width:100%}}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.8}}
+</style>
+</head>
+
+<body>
+<main class="card">
+
+<div class="check">✓</div>
+
+<h1>Demo Payment Successful!</h1>
+
+<p>
+Your demo payment has been simulated.
+We are now saving your booking and generating your RailBook ticket.
+</p>
+
+<div class="pill">{{ payment_method }}</div>
+<div class="ticket">🎟️</div>
+
+<div class="progress"><span></span></div>
+<p id="statusText">Generating your PNR and ticket...</p>
+
+<form action="{{ url_for('book') }}" method="POST" id="finishBooking">
+{% for key, values in booking_data.items() %}
+    {% for value in values %}
+        <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endfor %}
+{% endfor %}
+
+<button type="submit">Continue to Ticket</button>
+</form>
+
+</main>
+
+<script>
+const colors = ["#16834a","#245bb3","#e85d04","#f4c542","#8b5cf6"];
+
+for(let i = 0; i < 85; i++){
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background = colors[i % colors.length];
+    piece.style.animationDelay = Math.random() * 1.1 + "s";
+    piece.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+    document.body.appendChild(piece);
+}
+
+setTimeout(function(){
+    document.getElementById("statusText").textContent =
+        "Opening your confirmed ticket...";
+    document.getElementById("finishBooking").requestSubmit();
+}, 4200);
+</script>
+</body>
+</html>

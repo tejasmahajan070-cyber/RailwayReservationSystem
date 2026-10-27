@@ -820,94 +820,146 @@ trains = [
 
 # =========================================================
 # TRAIN RUNNING STATUS
+# SIMULATED DATA FOR PROJECT
 # =========================================================
 
-@app.route(
-    "/train-status",
-    methods=["GET", "POST"]
-)
-def train_running_status():
+train_status = {
 
-    result = None
-    train_number = ""
+    "12124": {
+        "status": "Running",
+        "current": "Lonavala",
+        "next": "Khandala",
+        "delay": "On Time",
+        "platform": "Platform 2"
+    },
 
-    if request.method == "POST":
+    "12125": {
+        "status": "Running",
+        "current": "Khadki",
+        "next": "Shivajinagar",
+        "delay": "5 Minutes Late",
+        "platform": "Platform 4"
+    },
 
-        train_number = request.form.get(
-            "train_number",
-            ""
-        ).strip()
+    "11010": {
+        "status": "Running",
+        "current": "Shivajinagar",
+        "next": "Khadki",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
 
-        # Find the train using its current number
-        selected_train = None
+    "11030": {
+        "status": "Running",
+        "current": "Dadar",
+        "next": "Thane",
+        "delay": "10 Minutes Late",
+        "platform": "Platform 5"
+    },
 
-        for train in trains:
+    "12127": {
+        "status": "Running",
+        "current": "Thane",
+        "next": "Kalyan",
+        "delay": "On Time",
+        "platform": "Platform 6"
+    },
 
-            if str(
-                train.get("number", "")
-            ).strip() == train_number:
+    "11007": {
+        "status": "Running",
+        "current": "Dadar",
+        "next": "Kurla",
+        "delay": "3 Minutes Late",
+        "platform": "Platform 3"
+    },
 
-                selected_train = train
-                break
+    "12129": {
+        "status": "Running",
+        "current": "Kalyan",
+        "next": "Dadar",
+        "delay": "On Time",
+        "platform": "Platform 7"
+    },
 
-        if selected_train:
+    "11009": {
+        "status": "Running",
+        "current": "Thane",
+        "next": "Kalyan",
+        "delay": "7 Minutes Late",
+        "platform": "Platform 5"
+    },
 
-            # Use existing status if available
-            status_data = train_status.get(
-                train_number,
-                {}
-            )
+    "12123": {
+        "status": "Running",
+        "current": "Kalyan",
+        "next": "Karjat",
+        "delay": "On Time",
+        "platform": "Platform 2"
+    },
 
-            # Show status for old and newly added trains
-            result = {
-                "train_number": train_number,
+    "11020": {
+        "status": "Running",
+        "current": "Lonavala",
+        "next": "Khandala",
+        "delay": "12 Minutes Late",
+        "platform": "Platform 1"
+    },
 
-                "train_name": selected_train.get(
-                    "name",
-                    "RailBook Express"
-                ),
+    "22150": {
+        "status": "Running",
+        "current": "Khadki",
+        "next": "Lonavala",
+        "delay": "On Time",
+        "platform": "Platform 4"
+    },
 
-                "status": status_data.get(
-                    "status",
-                    selected_train.get(
-                        "status",
-                        "Running"
-                    )
-                ),
+    "22149": {
+        "status": "Running",
+        "current": "Thane",
+        "next": "Dadar",
+        "delay": "6 Minutes Late",
+        "platform": "Platform 3"
+    },
 
-                "current_station": status_data.get(
-                    "current",
-                    selected_train.get(
-                        "from",
-                        "Not Available"
-                    )
-                ),
+    "11028": {
+        "status": "Running",
+        "current": "Pune",
+        "next": "Lonavala",
+        "delay": "15 Minutes Late",
+        "platform": "Platform 6"
+    },
 
-                "next_station": status_data.get(
-                    "next",
-                    selected_train.get(
-                        "to",
-                        "Not Available"
-                    )
-                ),
+    "12110": {
+        "status": "Running",
+        "current": "Dadar",
+        "next": "Thane",
+        "delay": "On Time",
+        "platform": "Platform 2"
+    },
 
-                "delay": status_data.get(
-                    "delay",
-                    "On Time"
-                ),
+    "12111": {
+        "status": "Running",
+        "current": "Khadki",
+        "next": "Lonavala",
+        "delay": "4 Minutes Late",
+        "platform": "Platform 1"
+    }
+}
 
-                "platform": status_data.get(
-                    "platform",
-                    "Platform 1"
-                )
-            }
+
+# =========================================================
+# HOME
+# =========================================================
+
+@app.route("/")
+def home():
+
+    if "user_id" not in session:
+        return redirect("/login")
 
     return render_template(
-        "train_status.html",
-        trains=trains,
-        train_status=train_status,
-        result=result,
-        train_number=train_number
+        "index.html",
+        trains=trains
     )
 
 

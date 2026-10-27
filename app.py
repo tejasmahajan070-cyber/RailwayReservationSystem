@@ -1842,14 +1842,7 @@ def seat_selection():
 # BOOK TRAIN
 # =========================================================
 
-@app.route(
-    "/book",
-    methods=["POST"]
-)
-@app.route(
-    "/book-train",
-    methods=["POST"]
-)
+
 # =========================================================
 # DEMO PAYMENT ROUTES - NO REAL MONEY
 # =========================================================
@@ -1978,6 +1971,9 @@ def process_demo_payment():
         booking_data=booking_data,
         payment_method=method_labels[payment_method]
     )
+@app.route("/book", methods=["POST"])
+@app.route("/book-train", methods=["POST"])
+
 def book():
 
     if "user_id" not in session:

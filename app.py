@@ -1084,6 +1084,146 @@ train_status = {
         "delay": "20 Minutes Early",
         "platform": "Platform 6"
     },
+    "54201": {
+        "status": "Running",
+        "current": "Gurgaon",
+        "next": "Garhi Harsaru",
+        "delay": "40 Minutes Late",
+        "platform": "Platform 6"
+    },
+    "78202": {
+        "status": "Running",
+        "current": "Bandikui Jn",
+        "next": "Alwar",
+        "delay": "1 Hour Late",
+        "platform": "Platform 8"
+    },
+    "65203": {
+        "status": "Running",
+        "current": "Old Delhi",
+        "next": "Ghaziabad",
+        "delay": "2 Hours Late",
+        "platform": "Platform 6"
+    },
+    "11204": {
+        "status": "Running",
+        "current": "Tundia Jn",
+        "next": "Aligarh Jn",
+        "delay": "On Time",
+        "platform": "Platform 2"
+    },
+    "81205": {
+        "status": "Running",
+        "current": "Kanpur Central",
+        "next": "Phaphund",
+        "delay": "On Time",
+        "platform": "Platform 3"
+    },
+    "08206": {
+        "status": "Running",
+        "current": "Ghaziabad",
+        "next": "Aligarh Jn",
+        "delay": "2 Minutes Early",
+        "platform": "Platform 4"
+    },
+    "29207": {
+        "status": "Running",
+        "current": "Moradabad",
+        "next": "Bareilly",
+        "delay": "2 Minutes Late",
+        "platform": "Platform 2"
+    },
+    "23208": {
+        "status": "Running",
+        "current": "Varanasi Jn",
+        "next": "Lucknow Nr",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
+    "20209": {
+        "status": "Running",
+        "current": "Jerur",
+        "next": "Solapur Jn",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
+    "45210": {
+        "status": "Running",
+        "current": "Tandur",
+        "next": "Seram",
+        "delay": "18 Minutes Early",
+        "platform": "Platform 2"
+    },
+    "34211": {
+        "status": "Running",
+        "current": "Kacheguda",
+        "next": "Mahbubnagar",
+        "delay": "On Time",
+        "platform": "Platform 3"
+    },
+    "87212": {
+        "status": "Running",
+        "current": "Anantpur",
+        "next": "Gooty",
+        "delay": "50 Minutes Late",
+        "platform": "Platform 6"
+    },
+    "00213": {
+        "status": "Running",
+        "current": "Bengaluru Cant",
+        "next": "Bangarapet",
+        "delay": "14 Minutes Late",
+        "platform": "Platform 1"
+    },
+    "90214": {
+        "status": "Running",
+        "current": "Tiruvallur",
+        "next": "Katpadi Jn",
+        "delay": "On Time",
+        "platform": "Platform 3"
+    },
+    "12215": {
+        "status": "Running",
+        "current": "Chennai Egmore",
+        "next": "Perambur",
+        "delay": "On Time",
+        "platform": "Platform 4"
+    },
+    "88216": {
+        "status": "Running",
+        "current": "Gadwal",
+        "next": "Kurnool City",
+        "delay": "4 Minutes Early",
+        "platform": "Platform 5"
+    },
+    "77217": {
+        "status": "Running",
+        "current": "Mahesana Jn",
+        "next": "Palanpur Jn",
+        "delay": "1 hour Late",
+        "platform": "Platform 1"
+    },
+    "32218": {
+        "status": "Running",
+        "current": "Ajmer Jn",
+        "next": "Pindwara",
+        "delay": "On Time",
+        "platform": "Platform 1"
+    },
+    "23219": {
+        "status": "Running",
+        "current": "Nagpur Jn",
+        "next": "Chandrapur",
+        "delay": "14 Minutes Late",
+        "platform": "Platform 2"
+    },
+    "22220": {
+        "status": "Running",
+        "current": "Kazipet Jn",
+        "next": "Balharshah",
+        "delay": "4 Minutes Early",
+        "platform": "Platform 1"
+    },
   
 }
 

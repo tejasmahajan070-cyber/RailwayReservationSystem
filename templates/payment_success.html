@@ -42,7 +42,7 @@ We are now saving your booking and generating your RailBook ticket.
 <div class="progress"><span></span></div>
 <p id="statusText">Generating your PNR and ticket...</p>
 
-<form action="{{ url_for('book') }}" method="POST" id="finishBooking">
+<form action="/book" method="POST" id="finishBooking">
 {% for key, values in booking_data.items() %}
     {% for value in values %}
         <input type="hidden" name="{{ key }}" value="{{ value }}">
